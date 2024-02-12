@@ -9,7 +9,7 @@
 
 Neste trabalho, foi desenvolvido um ficheiro python (script.py) que lê um ficheiro .csv e calcula algumas estatísticas pedidas pelo docente.
 
-Primeiramente, após ter lido todas as linhas do csv e ter guardado as mesmas numa lista de dicionários, cujos representam as colunas do dataset para ser de mais fácil acesso, a lista é ordenada consoante a modalidade, a qual é escrita no terminal para mostrar que a mesma está correta.
+Primeiramente, enquanto todas as linhas do csv são lidas guardadas numa lista de dicionários, cujas chaves representam as colunas do dataset para ser de mais fácil acesso, é construído um set com todas as modalidades. Após ter percorrido o csv, o set é ordenado obtendo o primeiro resultado pretendido.
 
 De seguida, a lista é filtrada pelos atletas aptos, obetendo assim o número total dos mesmos. Com este número calculado, apresentar a sua percentagem referente ao total de atletas é trivial.
 

@@ -7,7 +7,7 @@ if __name__ == "__main__":
     file =  open("emd.csv")
     data = file.read()
     lista = []
-
+    modalidades = set()
     for line in data.split("\n")[1:]:
         camps = line.split(",")
         if len(camps) == 13:
@@ -26,17 +26,19 @@ if __name__ == "__main__":
                     "federado": camps[11],
                     "resultado": camps[12]
                     })
+            modalidades.add(camps[8])
 
-    lista.sort(key=lambda x: x["modalidade"])
+    modalidades = sorted(modalidades)
 
-    for atleta in lista:
-        print(atleta)
+    print ("Modalidades ordenadas:")
+    for modalidade in modalidades:
+        print('\t' + modalidade)
 
     aptos = len(list(filter(lambda x: x["resultado"] == "true", lista)))
 
     rate_aptos = aptos / len(lista) * 100
 
-    print("Percentagem de atletas aptos: " + str(round(rate_aptos,2)) + "%\nPercentage de atletas não aptos: " + str(round(100 - rate_aptos,2)) + "%")
+    print("Percentagem de atletas aptos: " + str(round(rate_aptos,2)) + "%\nPercentagem de atletas não aptos: " + str(round(100 - rate_aptos,2)) + "%\n")
 
 
     intervals = {}
@@ -48,4 +50,4 @@ if __name__ == "__main__":
             intervals[interval] = 1
 
     for interval in intervals:
-        print("[" + str(interval[0]) + "-" + str(interval[1]) + "]: " + str(intervals[interval]))
+        print("[" + str(interval[0]) + "-" + str(interval[1]) + "]: " + str(intervals[interval]) + ' (' + str(round(intervals[interval] / len(lista) * 100, 2)) +'%)')
