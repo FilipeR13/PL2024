@@ -1,11 +1,12 @@
+import sys
+
 def find_interval(x, interval_size=5, start=0):
     interval_start = start + (x // interval_size * interval_size)
     return (interval_start, interval_start + interval_size - 1)
 
 
 if __name__ == "__main__":
-    file =  open("emd.csv")
-    data = file.read()
+    data = sys.stdin.read()
     lista = []
     modalidades = set()
     for line in data.split("\n")[1:]:
