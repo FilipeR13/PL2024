@@ -15,11 +15,11 @@ def subs_italic(line):
 
 def subs_link(line):
     link = re.compile(r'(\[)(.*)(\])\((.*)\)')
-    return link.sub(r'<a href=\"\4\">\2</a>', line)
+    return link.sub(r'<a href="\4">\2</a>', line)
 
 def subs_images(line):
     images = re.compile(r'!(\[)(.*)(\])\((.*)\)')
-    return images.sub(r'<img src=\"\4\" alt=\"\2\">', line)
+    return images.sub(r'<img src="\4" alt="\2">', line)
 
 def subs_header(line):
     header = re.search(r'^(\s*(#(?!#)|##(?!#)|###))', line)
