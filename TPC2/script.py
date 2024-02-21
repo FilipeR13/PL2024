@@ -26,18 +26,13 @@ def subs_header(line):
     if header:
         if header.group(2) == "#":
             new_line = "<h1>" + line.strip('# ') + "</h1>\n"
-            print(new_line)
             return new_line
         elif header.group(2) == "##":
             new_line = "<h2>" + line.strip('# ') + "</h2>\n"
-            print(new_line)
             return new_line
         elif header.group(2) == "###":
             new_line = "<h3>" + line.strip('# ') + "</h3>\n"
-            print(new_line)
             return new_line
-    else:
-        print('header: false')
     return line
 
 def subs_list(line):
@@ -48,12 +43,10 @@ def subs_list(line):
     ul_regex = re.compile(r'^\s*[\*\-\+] (.*)$')
     ol_regex = re.compile(r'^\s*\d+\.\s(.*)$')
 
-    print(line)
     matchul = ul_regex.match(line)
     matchol = ol_regex.match(line)
 
     if matchul:
-        print('list: true')
         if not Inlist:
             listType = "ul"
             Inlist = True
@@ -62,7 +55,6 @@ def subs_list(line):
         else:
             return "<li>" + matchul.group(1) + "</li>\n"
     elif matchol:
-        print('list: true')
         if not Inlist:
             listType = "ol"
             Inlist = True
@@ -71,7 +63,6 @@ def subs_list(line):
         else:
             return "<li>" + matchol.group(1) + "</li>\n"
     else:
-        print('list: false')
         if Inlist:
             CloseList = True
             Inlist = False
