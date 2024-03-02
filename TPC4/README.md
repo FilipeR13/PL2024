@@ -27,4 +27,4 @@ Desta forma é impresso no terminal todos os matches por ordem.
  
 ### Executar
 
-Para executar o programa basta executar um dos seguintes comandos no terminal: `python3  analisador.py`
+Para executar o programa basta executar um dos seguintes comandos no terminal: `python3 analisador.py`
