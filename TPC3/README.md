@@ -1,4 +1,4 @@
-# TPC2: Conversor de MD para HTML
+# TPC2: Contador On/Off
 ## 2024/02/26
 
 ## Autor:
