@@ -1,4 +1,4 @@
-# TPC2: Contador On/Off
+# TPC3g: Contador On/Off
 ## 2024/02/26
 
 ## Autor:
