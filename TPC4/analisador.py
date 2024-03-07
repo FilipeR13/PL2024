@@ -1,43 +1,72 @@
 import sys
 import re
 
-def tokenize(code):
-    token_specification = [
-        ('SELECT', r'Select'),
-        ('FROM', r'from'),
-        ('WHERE', r'where'),
-        ('ID', r'[_A-Za-z]\w*'),
-        ('COMMA', r','),
-        ('GREATER', r'>='),
-        ('NUM', r'([0-9]*[.])?[0-9]+'),
-        ('SKIP', r'[ \t]+'),
-        ('ERRO', r'.'),
-    ]
-    tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
-    recognized = []
-    mo = re.finditer(tok_regex, code, re.IGNORECASE)
-    for m in mo:
-        dic = m.groupdict()
-        if dic['SELECT']:
-            t = ("SELECT", dic['SELECT'], m.span())
-        elif dic['FROM']:
-            t = ("FROM", dic['FROM'], m.span())
-        elif dic['WHERE']:
-            t = ("WHERE", dic['WHERE'], m.span())
-        elif dic['ID']:
-            t = ("ID", dic['ID'], m.span())
-        elif dic['COMMA']:
-            t = ("COMMA", dic['COMMA'], m.span())
-        elif dic['GREATER']:
-            t = ("GREATER", dic['GREATER'], m.span())
-        elif dic['NUM']:
-            t = ("NUM", dic['NUM'], m.span())
-        else:
-            t = ("ERRO", m.group(), m.span())
-        recognized.append(t)
+import ply.lex as lex
 
-    return recognized
+reserved = {
+    'select': 'SELECT',
+    'from': 'FROM',
+    'where': 'WHERE',
+    'and': 'AND',
+    'or': 'OR',
+    'like': 'LIKE',
+    'inner': 'INNER',
+    'outer': 'OUTER',
+    'left': 'LEFT',
+    'right': 'RIGHT',
+    'full': 'FULL',
+    'on': 'ON',
+    # ...
+}
 
-for linha in sys.stdin:
-    for tok in tokenize(linha):
-        print(tok)
+tokens = [
+    "FIELD",
+    "COMMAND",
+    "DELIMITER",
+    "FINAL_DELIMITER",
+    "NUMBER",
+    "MATH_OPERATOR",
+] + list(reserved.values())
+
+def t_COMMAND(t):
+    r'\b[a-zA-Z]+\b'
+    if t.value.lower() in reserved:
+        t.type = reserved.get(t.value.lower(), "COMMAND")
+    else:
+        t.type = "FIELD"
+    return t
+
+t_DELIMITER = r',' 
+
+t_FINAL_DELIMITER = r';'
+
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+
+def t_MATH_OPERATOR(t):
+    r">=|<=|\+|-|\*|>|<|="
+    return t
+
+def t_NEWLINE(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+t_ignore = '\t'
+
+def t_error(t):
+    sys.stderr.write(f"Error: Unexpected character {t.value[0]}\n")
+    t.lexer.skip(1) # Skip the character
+
+def main(stdin):
+    lexer = lex.lex()
+    for linha in stdin:
+        lexer.input(linha)
+        for token in lexer:
+            if not token: break 
+            print(token)
+
+
+if __name__ == '__main__':
+    main(sys.stdin)

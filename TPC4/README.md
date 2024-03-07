@@ -13,17 +13,16 @@ Para este trabalho foi desenvolvido um analisador léxico que atribui tokens a u
 
 Desta forma, foram criados os seguintes tokens, cada um com o seu devido regex:
 
-* SELECT
-* FROM
-* WHERE
-* ID
-* COMMA
-* GREATER
-* NUM
-* SKIP
-* ERRO
+* FIELD
+* COMMAND
+* DELIMITER
+* FINAL_DELIMITER
+* NUMBER
+* MATH_OPERATOR
 
-Desta forma é impresso no terminal todos os matches por ordem.
+Para além deste, existe ainda um token para cada tipo de instrução SQL (As instruções listadas podem ser encontradas no dicionário `reserved`)
+
+Recorreu-se à biblioteca [ply](https://www.dabeaz.com/ply/ply.html), que é uma ferramenta para a construção de analisadores léxicos e sintáticos.
  
 ### Executar
 
