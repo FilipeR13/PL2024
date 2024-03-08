@@ -1,0 +1,24 @@
+{
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Agua",
+            "preco": 0.6
+        },
+        {
+            "id": 2,
+            "nome": "Coca-Cola",
+            "preco": 0.9
+        },
+        {
+            "id": 3,
+            "nome": "Palmier",
+            "preco": 0.7
+        },
+        {
+            "id": 3,
+            "nome": "Croassant Misto",
+            "preco": 1.2
+        }
+    ]
+}
