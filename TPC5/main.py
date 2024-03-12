@@ -63,10 +63,9 @@ def main(argv):
         for token in lexer:
             if not token: break 
             if token.type == "LISTAR":
-                print('     Número     |            Nome           |     Preço')
+                print('     Número     |            Nome                              |       Preço')
                 for produto in produtos:
-                    print(f'       {produto["id"]}        |            {produto["nome"]: <11}     |     {produto["preco"]}')
-
+                    print(f'       {produto["id"]}        |        {produto["nome"]: <30}        |       {produto["preco"]}')
             elif token.type == "MOEDA":
                 moedas = token.value.split(" ")[1].split(",")
                 for moeda in moedas:
@@ -77,7 +76,7 @@ def main(argv):
                 print(f"Saldo: {saldo}€")
             
             elif token.type == "SAIR":
-                print(f"Troco: {saldo}")
+                print(f"Troco: {round(saldo,2)}")
                 change = get_change(saldo)
                 for coin in change:
                     if change[coin] > 0:
