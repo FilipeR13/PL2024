@@ -3,21 +3,25 @@
         {
             "id": 1,
             "nome": "Agua",
+            "quantidade": 10,
             "preco": 0.6
         },
         {
             "id": 2,
             "nome": "Coca-Cola",
+            "quantidade": 1,
             "preco": 0.9
         },
         {
             "id": 3,
             "nome": "Palmier",
+            "quantidade": 10,
             "preco": 0.7
         },
         {
             "id": 3,
             "nome": "Croassant Misto",
+            "quantidade": 10,
             "preco": 1.2
         }
     ]
